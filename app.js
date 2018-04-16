@@ -1,7 +1,18 @@
 // ----
 // DATA
 // ----
-// A couple jokes to start with
+
+// Initialize Firebase
+var config = {
+  apiKey: 'AIzaSyAYBv7kHEGutKa9p3v_YmR_3zbJ9Z_IhiM',
+  authDomain: 'joke-a-tron-9000-d3d7e.firebaseapp.com',
+  databaseURL: 'https://joke-a-tron-9000-d3d7e.firebaseio.com',
+  projectId: 'joke-a-tron-9000-d3d7e',
+  storageBucket: 'joke-a-tron-9000-d3d7e.appspot.com',
+  messagingSenderId: '368219691659'
+}
+firebase.initializeApp(config)
+firebase.auth().signInAnonymously()
 
 var jokes = {
   'the horse': {
@@ -13,6 +24,14 @@ var jokes = {
     punchline: 'With an asteroid belt.'
   }
 }
+firebase.database().ref('jokes').push({
+  setup: 'What do you call a bear with no teeth?',
+  punchline: 'A gummy bear!'
+})
+firebase.database().ref('jokes/gummy bear/punchline').set(
+  'A gummy bear! 🐻'
+)
+firebase.database().ref('jokes/gummy bear').remove()
 
 var stringifiedJokes = window.localStorage.getItem('stringifiedJokes', jokes)
 if (stringifiedJokes != null) {
